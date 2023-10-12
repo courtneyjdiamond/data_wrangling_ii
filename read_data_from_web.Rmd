@@ -1,0 +1,32 @@
+---
+title: "Read Data from the Web"
+output: github_document
+date: "2023-10-12"
+---
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(httr)
+```
+
+
+## Extracting Tables
+```{r}
+nsduh_url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+```
+
+```{r}
+nsduh_html = read_html(nsduh_url)
+```
+
+```{r}
+marj_use_df =
+  nsduh_html |> 
+  html_table() |> 
+  first() |> 
+  slice(-1)
+```
+
+## CSS Selectors
+
