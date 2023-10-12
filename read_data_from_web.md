@@ -51,3 +51,34 @@ marj_use_df =
 ```
 
 ## CSS Selectors
+
+Import Star Wars
+
+``` r
+swm_url = "https://www.imdb.com/list/ls070150896/"
+
+swm_html = 
+  read_html(swm_url)
+```
+
+``` r
+swm_title_vector = 
+  swm_html |> 
+    html_elements(".lister-item-header a") |> 
+    html_text()
+```
+
+``` r
+swm_gross_rev_vec = 
+  swm_html |> 
+    html_elements(".text-small:nth-child(7) span:nth-child(5)") |> 
+    html_text()
+```
+
+``` r
+swm_df = 
+  tibble(
+    title = swm_title_vector,
+    gross_rev = swm_gross_rev_vec
+  )
+```
